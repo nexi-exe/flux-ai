@@ -1,12 +1,13 @@
 import discord
-import openai
+import google.generativeai as genai
 import config
 
-openai.api_key = config.OPENAI_API_KEY
+genai.configure(api_key=config.GEMINI_API_KEY)
 
 class AI(discord.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.model = genai.GenerativeModel("gemini-pro")
 
     @discord.Cog.listener()
     async def on_message(self, message):
@@ -17,7 +18,7 @@ class AI(discord.Cog):
             content = message.content.replace(f"<@{self.bot.user.id}>", "").strip()
             if not content:
                 reply = (
-                    "**Professional AI chat bot at your service!**\n"
+                    "**Professional Gemini AI chat bot at your service!**\n"
                     "Tag me and ask your question."
                 )
             else:
@@ -27,14 +28,8 @@ class AI(discord.Cog):
 
     async def generate_ai_reply(self, user_message):
         try:
-            resp = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
-                messages=[
-                    {"role": "system", "content": "You are a professional AI assistant for Discord. Reply with clear, concise, and well-formatted markdown."},
-                    {"role": "user", "content": user_message}
-                ]
-            )
-            return resp.choices[0].message['content'].strip()
+            response = await self.model.generate_content_async(user_message)
+            return response.text.strip()
         except Exception:
             return "Sorry, I couldn't generate a reply right now."
 
