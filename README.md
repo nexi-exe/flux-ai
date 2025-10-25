@@ -1,7 +1,7 @@
 # Flux AI discord bot
 
 A professional, modular Discord bot with:
-- **AI Chat:** Mention the bot to talk with AI (OpenAI GPT, message replies).
+- **AI Chat:** Mention the bot to talk with AI (GeminiAI, message replies).
 - **Music:** Play, join, leave, pause/resume/skip/stop with buttons. Prefix and slash commands. Scalable with Lavalink/wavelink.
 - **Utilities:** Avatar, server info, ping, help. Prefix and slash commands, all replies are embeds.
 - **Owner/Whitelist:** No prefix required for owner and whitelisted users. Use MongoDB.
@@ -15,7 +15,7 @@ A professional, modular Discord bot with:
    ```
 2. Set these environment variables:
    - `DISCORD_TOKEN` — your bot token
-   - `OPENAI_API_KEY` — your OpenAI key
+   - `GEMINI_API_KEY` — your GeminiAI key
    - `MONGODB_URI` — MongoDB URI
    - `OWNER_ID` — your Discord user ID
    - `LAVALINK_HOST` — Lavalink host (default `localhost`)
